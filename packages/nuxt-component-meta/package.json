@@ -23,13 +23,13 @@
     "nuxt": "nuxt"
   },
   "devDependencies": {
-    "@nuxt/kit": "^3.16.2",
+    "@nuxt/kit": "^4.0.3",
     "@shuriken-ui/nuxt": "workspace:*",
     "nuxt": "catalog:",
-    "nuxt-component-meta": "^0.10.1",
+    "nuxt-component-meta": "^0.13.1",
     "pathe": "^2.0.3",
     "reka-ui": "catalog:",
     "tailwindcss": "catalog:",
-    "vite": "^6.2.6"
+    "vite": "^7.1.2"
   }
 }

@@ -186,7 +186,7 @@ function wrapExternalLinks(string: string) {
                   <div class="text-xs flex items-center gap-1 mt-2">
                     <span class="text-muted-600 dark:text-muted-400">default:</span>
                     <ProseCode>
-                      {{ !prop.default || prop.default === 'undefined' ? '-' : prop.default }}
+                      {{ !prop.default || (prop.default === 'undefined' || prop.default === 'void 0') ? '-' : prop.default }}
                     </ProseCode>
                   </div>
                 </td>

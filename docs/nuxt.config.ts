@@ -56,6 +56,7 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
+        'minisearch',
         'scule',
         'vue3-smooth-dnd',
         'vue3-apexcharts',
