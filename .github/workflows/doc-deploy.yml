@@ -1,4 +1,4 @@
-name: Deploy Laast.io
+name: Deploy Shuriken UI Docs
 
 on:
   push:

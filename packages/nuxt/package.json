@@ -1,7 +1,7 @@
 {
   "name": "@shuriken-ui/nuxt",
   "type": "module",
-  "version": "4.0.0-beta.4",
+  "version": "4.0.0",
   "author": "Css Ninja <hello@cssninja.io> (https://cssninja.io)",
   "license": "MIT",
   "repository": {
