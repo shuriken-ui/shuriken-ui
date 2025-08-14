@@ -52,7 +52,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addVitePlugin(tailwindcss())
 
-    async function registerModule(name: string, options: Record<string, any>) {
+    async function registerModule(name: string, options: Record<string, any>): Promise<void> {
       if (!hasNuxtModule(name)) {
         await installModule(name, options)
       }

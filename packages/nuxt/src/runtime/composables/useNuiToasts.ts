@@ -1,6 +1,7 @@
-import type { BaseToastEmits, BaseToastProps } from '@shuriken-ui/nuxt'
+import type { Ref } from 'vue'
+import type { BaseToastEmits, BaseToastProps } from '../components/Toast.vue'
 
-import { useState } from '#app'
+import { useState } from '#imports'
 
 type EmitsToProps<T> = {
   [K in keyof T as `on${Capitalize<string & K>}`]?: T[K] extends any[] ? (...args: T[K]) => void : never;
@@ -10,7 +11,12 @@ interface Toast extends Omit<BaseToastProps, 'as' | 'asChild'>, EmitsToProps<Bas
   id: string
 }
 
-export function useNuiToasts() {
+export function useNuiToasts(): {
+  toasts: Ref<Toast[]>
+  add: (options: Partial<Toast>) => Toast
+  remove: (id: string) => void
+  clear: () => void
+} {
   const toasts = useState<Toast[]>('nui-toasts', () => [])
   const max = useState('nui-toasts-max', () => 3)
 
@@ -24,15 +30,15 @@ export function useNuiToasts() {
 
     toasts.value.push(toast)
 
-    const open = toasts.value.filter(t => t.open).length
+    const open = toasts.value.filter((t: Toast) => t.open).length
     if (open > max.value) {
       toasts.value.shift()
     }
 
     return toast
   }
-  function remove(id: string) {
-    const index = toasts.value.findIndex(t => t.id === id)
+  function remove(id: string): void {
+    const index = toasts.value.findIndex((t: Toast) => t.id === id)
     if (index === -1)
       return
 
@@ -40,10 +46,10 @@ export function useNuiToasts() {
     toasts.value[index].open = false
 
     setTimeout(() => {
-      toasts.value = toasts.value.filter(t => t.id !== id)
+      toasts.value = toasts.value.filter((t: Toast) => t.id !== id)
     }, 200)
   }
-  function clear() {
+  function clear(): void {
     toasts.value = []
   }
 

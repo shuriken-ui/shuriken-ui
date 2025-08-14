@@ -16,7 +16,7 @@ layout: 'default'
 ```vue [Comp.vue]
 <template>
   <BasePagination
-    v-model:page="page"
+    v-model:page="pageQuery"
     :items-per-page="8"
     :total="512"
     :sibling-count="2"
@@ -26,7 +26,7 @@ layout: 'default'
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const page = computed({
+const pageQuery = computed({
   get() {
     return Number(route.query.page) || 1
   },
@@ -85,7 +85,7 @@ Use the `variant` prop to change the color of the pagination.
 ```vue [Comp.vue]
 <template>
   <BasePagination
-    v-model:page="page"
+    v-model:page="pageQuery"
     :items-per-page="8"
     :total="512"
     :sibling-count="2"
@@ -97,7 +97,7 @@ Use the `variant` prop to change the color of the pagination.
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const page = computed({
+const pageQuery = computed({
   get() {
     return Number(route.query.page) || 1
   },
@@ -121,7 +121,7 @@ Use the `rounded` prop to change the border radius of the pagination.
 ```vue [Comp.vue]
 <template>
   <BasePagination
-    v-model:page="page"
+    v-model:page="pageQuery"
     :items-per-page="8"
     :total="512"
     :sibling-count="2"
@@ -132,7 +132,7 @@ Use the `rounded` prop to change the border radius of the pagination.
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const page = computed({
+const pageQuery = computed({
   get() {
     return Number(route.query.page) || 1
   },
@@ -156,7 +156,7 @@ Use the `size` prop to change the size of the pagination buttons.
 ```vue [Comp.vue]
 <template>
   <BasePagination
-    v-model:page="page"
+    v-model:page="pageQuery"
     :items-per-page="8"
     :total="512"
     :sibling-count="2"
@@ -167,7 +167,7 @@ Use the `size` prop to change the size of the pagination buttons.
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const page = computed({
+const pageQuery = computed({
   get() {
     return Number(route.query.page) || 1
   },
@@ -192,7 +192,7 @@ Use the slots to customize the pagination buttons layout. Use the `<PaginationIt
 <template>
   <BasePagination
     v-slot="{ items }"
-    v-model:page="page"
+    v-model:page="pageQuery"
     :items-per-page="8"
     :total="512"
     :sibling-count="2"
@@ -214,7 +214,7 @@ Use the slots to customize the pagination buttons layout. Use the `<PaginationIt
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const page = computed({
+const pageQuery = computed({
   get() {
     return Number(route.query.page) || 1
   },
@@ -238,7 +238,7 @@ Use the slots to customize the pagination buttons layout. Use the `<page />` slo
 ```vue [Comp.vue]
 <template>
   <BasePagination
-    v-model:page="page"
+    v-model:page="pageQuery"
     :items-per-page="8"
     :total="1_000_000"
     :sibling-count="1"
@@ -257,7 +257,7 @@ Use the slots to customize the pagination buttons layout. Use the `<page />` slo
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const page = computed({
+const pageQuery = computed({
   get() {
     return Number(route.query.page) || 1
   },

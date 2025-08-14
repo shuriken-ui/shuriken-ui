@@ -2,8 +2,8 @@
 import { joinURL } from 'ufo'
 
 const props = withDefaults(defineProps<{
-  category: string
   fileName: string
+  category?: string
   framework?: 'nuxt' | 'react' | 'tailwind'
   storybook?: string
 }>(), {

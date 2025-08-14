@@ -1,4 +1,4 @@
-import type { MaybeRefOrGetter } from 'vue'
+import type { ComputedRef, MaybeRefOrGetter } from 'vue'
 import { escapeHtml } from '@vue/shared'
 
 import { computed, toValue } from 'vue'
@@ -7,7 +7,7 @@ export function useNuiMark(
   _text?: MaybeRefOrGetter<string | undefined>,
   _search?: MaybeRefOrGetter<string | undefined>,
   _classes?: MaybeRefOrGetter<string | undefined>,
-) {
+): ComputedRef<string> {
   return computed(() => {
     const text = toValue(_text)
     const classes = toValue(_classes)

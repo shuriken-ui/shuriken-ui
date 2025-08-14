@@ -1,7 +1,11 @@
+import type { Ref } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import { onMounted, ref } from 'vue'
 
-export function useNuiWindowScroll() {
+export function useNuiWindowScroll(): {
+  x: Ref<number>
+  y: Ref<number>
+} {
   const x = ref(0)
   const y = ref(0)
 

@@ -1,4 +1,5 @@
-import type { RouteLocationRaw } from 'vue-router'
+import type { ComputedRef } from 'vue'
+import type { RouteLocationAsPathGeneric, RouteLocationAsRelativeGeneric, RouteLocationRaw } from 'vue-router'
 import { defineNuxtLink } from '#imports'
 import { computed } from 'vue'
 
@@ -16,7 +17,17 @@ const NuxtLink = defineNuxtLink({})
 export function useNuiButton(properties: BaseButtonProperties, {
   externalDefaultRelationship = 'noopener noreferrer',
   externalDefaultTarget = '_blank',
-} = {}) {
+} = {}): {
+  attributes: ComputedRef<{
+    to?: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric | undefined
+    href?: string
+    disabled?: boolean
+    type?: string
+    rel?: string
+    target?: string
+  }>
+  is: ComputedRef<'a' | 'button'>
+} {
   const is = computed(() =>
     properties.to ? NuxtLink : properties.href ? 'a' : 'button',
   )

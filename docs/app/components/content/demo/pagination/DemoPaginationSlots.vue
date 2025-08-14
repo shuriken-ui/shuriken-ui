@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const router = useRouter()
-const page = computed({
+const pageQuery = computed({
   get() {
     return Number(route.query.page) || 1
   },
@@ -16,7 +16,7 @@ const formatter = new Intl.NumberFormat('en-US', { style: 'decimal' })
 <template>
   <div class="p-4">
     <BasePagination
-      v-model:page="page"
+      v-model:page="pageQuery"
       :items-per-page="8"
       :total="1_000_000"
       :sibling-count="1"

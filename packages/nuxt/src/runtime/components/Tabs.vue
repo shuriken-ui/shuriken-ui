@@ -40,7 +40,9 @@ export interface BaseTabsProps<T extends StringOrNumber = StringOrNumber> extend
    */
   type?: 'tabs' | 'box'
 }
-export interface BaseTabsEmits<T extends StringOrNumber = StringOrNumber> extends TabsRootEmits<T> {}
+export interface BaseTabsEmits<T extends StringOrNumber = StringOrNumber> extends TabsRootEmits<T> {
+  'update:modelValue': [payload: T]
+}
 export interface BaseTabsSlots {
   default: () => any
   trigger: () => any

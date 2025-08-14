@@ -1,8 +1,41 @@
-import type { InjectionKey } from 'vue'
+import type { ComputedRef, InjectionKey, Ref } from 'vue'
 import { computed, inject, nextTick, provide, ref, toRef } from 'vue'
 import { useNuiId } from './useNuiId'
 
-export type NuiFieldContext = ReturnType<typeof provideNuiField>
+export interface NuiFieldContext {
+  id: Ref<string | undefined>
+  name: Ref<string | undefined>
+  error: Ref<string | undefined>
+  state: Ref<'idle' | 'loading' | 'success' | 'error' | undefined>
+  required: Ref<boolean | undefined>
+  disabled: Ref<boolean | undefined>
+  fieldset: Ref<boolean | undefined>
+  ids: ComputedRef<{
+    input?: string
+    label?: string
+    description?: string
+    error?: string
+  }>
+  inputRef: (el: any) => void
+  inputAttrs: ComputedRef<{
+    'id'?: string
+    'name'?: string
+    'required'?: boolean
+    'disabled'?: boolean
+    'aria-labelledby'?: string
+    'aria-describedby'?: string
+    'aria-required'?: string
+    'aria-invalid'?: string
+    'aria-errormessage'?: string
+  }>
+  inputMounted: Ref<boolean>
+  labelRef: (el: any) => void
+  labelMounted: Ref<boolean>
+  descriptionRef: (el: any) => void
+  descriptionMounted: Ref<boolean>
+  errorRef: (el: any) => void
+  errorMounted: Ref<boolean>
+}
 
 const symbol = Symbol('NuiField') as InjectionKey<NuiFieldContext>
 
@@ -14,7 +47,7 @@ export function provideNuiField(props: {
   required?: boolean
   disabled?: boolean
   fieldset?: boolean
-}) {
+}): NuiFieldContext {
   const id = toRef(props, 'id')
   const name = toRef(props, 'name')
   const error = toRef(props, 'error')
@@ -28,10 +61,10 @@ export function provideNuiField(props: {
   const descriptionMounted = ref(false)
   const errorMounted = ref(false)
 
-  const idInput = useNuiId(() => id?.value ? id?.value : undefined)
-  const idLabel = useNuiId(() => id?.value ? `${id?.value}-label` : undefined)
-  const idDescription = useNuiId(() => id?.value ? `${id?.value}-desc` : undefined)
-  const idError = useNuiId(() => id?.value ? `${id?.value}-error` : undefined)
+  const idInput = useNuiId(() => id.value ? id.value : undefined)
+  const idLabel = useNuiId(() => id.value ? `${id.value}-label` : undefined)
+  const idDescription = useNuiId(() => id.value ? `${id.value}-desc` : undefined)
+  const idError = useNuiId(() => id.value ? `${id.value}-error` : undefined)
 
   const ids = computed(() => {
     return {
@@ -59,7 +92,7 @@ export function provideNuiField(props: {
     }
   })
 
-  function inputRef(el: any) {
+  function inputRef(el: any): void {
     if (el) {
       nextTick(() => {
         inputMounted.value = true
@@ -70,7 +103,7 @@ export function provideNuiField(props: {
     }
   }
 
-  function labelRef(el: any) {
+  function labelRef(el: any): void {
     if (el) {
       labelMounted.value = true
     }
@@ -79,7 +112,7 @@ export function provideNuiField(props: {
     }
   }
 
-  function descriptionRef(el: any) {
+  function descriptionRef(el: any): void {
     if (el) {
       descriptionMounted.value = true
     }
@@ -88,7 +121,7 @@ export function provideNuiField(props: {
     }
   }
 
-  function errorRef(el: any) {
+  function errorRef(el: any): void {
     if (el) {
       errorMounted.value = true
     }
@@ -134,7 +167,7 @@ export function useNuiField(options?: NuiFieldOptions): NuiFieldContext {
 
   return context
 }
-export function tryUseNuiField(options?: NuiFieldOptions) {
+export function tryUseNuiField(options?: NuiFieldOptions): NuiFieldContext | null {
   try {
     return useNuiField({
       defaultValue: options?.defaultValue ?? null,

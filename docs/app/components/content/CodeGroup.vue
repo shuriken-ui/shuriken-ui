@@ -14,7 +14,7 @@ provide('code-group-context', true)
 // Computed
 const slots = useSlots() as any
 const slotsContent = computed(() => slots.default?.() || [])
-const tabs = computed(() => slotsContent.value?.map?.((slot: any, index: any) => {
+const tabs = computed(() => slotsContent.value?.map?.((slot: any) => {
   return {
     filename: slot?.props?.filename,
     language: slot?.props?.language,

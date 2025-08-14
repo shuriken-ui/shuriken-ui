@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { ToastProviderProps } from 'reka-ui'
-import { useState } from '#app'
+import { useState } from '#imports'
 import { reactiveOmit } from '@vueuse/core'
 import { ToastProvider, ToastViewport, useForwardProps } from 'reka-ui'
 import { computed, watchEffect } from 'vue'

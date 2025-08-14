@@ -8,10 +8,10 @@ const previewMap = new WeakMap<File, Ref<string | undefined>>()
  */
 export function useNuiFilePreview(
   _file: MaybeRefOrGetter<File | null | undefined>,
-) {
+): Ref<string | undefined> {
   const preview = ref<string>()
 
-  watchEffect(() => {
+  watchEffect((onCleanup) => {
     const file = toValue(_file)
     if (!file) {
       preview.value = undefined
@@ -25,7 +25,7 @@ export function useNuiFilePreview(
 
     const reader = new FileReader()
 
-    const listener = () => {
+    function listener(): void {
       preview.value = reader.result?.toString() ?? ''
       reader.removeEventListener('load', listener)
     }
@@ -34,9 +34,9 @@ export function useNuiFilePreview(
 
     previewMap.set(file, preview)
 
-    return () => {
+    onCleanup(() => {
       reader.removeEventListener('load', listener)
-    }
+    })
   })
 
   return preview
