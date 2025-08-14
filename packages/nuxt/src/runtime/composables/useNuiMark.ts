@@ -3,6 +3,10 @@ import { escapeHtml } from '@vue/shared'
 
 import { computed, toValue } from 'vue'
 
+function escapeRegExp(literal: string): string {
+  return literal.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
 export function useNuiMark(
   _text?: MaybeRefOrGetter<string | undefined>,
   _search?: MaybeRefOrGetter<string | undefined>,
@@ -21,10 +25,10 @@ export function useNuiMark(
       return escapeHtml(text)
     }
 
-    const regex = new RegExp(search, 'gi')
+    const regex = new RegExp(escapeRegExp(search), 'gi')
 
-    return text?.replace(regex, (part) => {
+    return text.replace(regex, (part) => {
       return `<mark class="${classes}">${escapeHtml(part)}</mark>`
-    }) ?? ''
+    })
   })
 }
